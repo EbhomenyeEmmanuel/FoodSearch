@@ -3,7 +3,7 @@ package com.esq.foodsearch;
 
 import com.google.gson.annotations.SerializedName;
 
-public class SearchListResponse {
+public class SearchListResponseModel {
 
     @SerializedName("food_id")
     private String id;

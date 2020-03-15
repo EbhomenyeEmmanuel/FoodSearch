@@ -26,10 +26,15 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     // For control over item selection of both touch and mouse driven selection
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
-
-    implementation 'com.squareup.retrofit:retrofit:1.9.0'
+    // dependency for Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    // JSON Parsing
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
 }
