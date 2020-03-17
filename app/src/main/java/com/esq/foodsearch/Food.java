@@ -2,8 +2,10 @@ package com.esq.foodsearch;
 
 
 import com.google.gson.annotations.SerializedName;
-
-public class SearchListResponseModel {
+/*
+ *Food class contain details about a specified food
+ */
+public class Food {
 
     @SerializedName("food_id")
     private String id;
