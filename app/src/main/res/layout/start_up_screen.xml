@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,28 +14,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="184dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="122dp"
-        android:text="Welcome"
+        android:text="@string/welcomeText"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFF"
         android:textSize="48sp" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="166dp"
-        android:text="Click on the button below to authorize User"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#FFF"
-        android:textSize="28sp" />
 
 
     <Button
@@ -51,6 +33,8 @@
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="134dp"
         android:background="@drawable/custom_button"
-        android:text="Click" />
+        android:text="@string/button_text"
+        android:textColor="@color/white"
+        />
 
 </RelativeLayout>

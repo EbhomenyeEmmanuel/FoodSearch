@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="5dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#4990E2"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginBottom="5dp"
     >
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name:"
-            android:textColor="@color/colorPrimary"
+            android:textColor="#E7EFF6"
+            android:layout_margin="5dp"
             android:textSize="17sp" />
-
 
         <TextView
             android:id="@+id/type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Type:"
-            android:textColor="@color/colorPrimary"
+            android:textColor="#E7EFF6"
+            android:layout_margin="5dp"
             android:textSize="16sp" />
 
         <TextView
@@ -34,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Brand Name:"
-            android:textColor="@color/colorPrimary"
+            android:textColor="#E7EFF6"
+            android:layout_margin="5dp"
             android:textSize="16sp" />
 
         <View
@@ -42,7 +41,6 @@
             android:layout_height="1dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
-            android:background="@color/colorPrimary" />
+            android:background="#E7EFF6" />
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
