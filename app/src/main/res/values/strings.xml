@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FoodSearch</string>
+    <string name="button_text">Click - Here</string>
+    <string name="welcomeText">Welcome</string>
 </resources>
