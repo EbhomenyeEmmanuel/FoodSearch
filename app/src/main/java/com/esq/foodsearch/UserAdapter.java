@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
+/*
+ *Class to bind data
+ */
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsersViewHolder>{
     Context context;
     ArrayList<Food> foodData;
@@ -28,16 +30,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsersViewHolde
         this.foodData = foodData;
         this.context = context;
         if (foodData == null) {
-            Log.d(TAG,"Constuctor: FoodData is null" );
+            Log.d(TAG,"Constructor: FoodData is null" );
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.UsersViewHolder holder, final int position) {
         // set the data
-        holder.name.setText("Name: " + foodData.get(position).getFoodName());
-        holder.type.setText("Type: " + foodData.get(position).getFoodType());
-        holder.brandName.setText("Brand Name: " + foodData.get(position).getBrandName());
+        //holder.name.setText(String.format("%s : %s",   String.valueOf(R.string.foodName), foodData.get(position).getFoodName()));
+        holder.name.setText(String.format("%s : %s",   "Food Name", foodData.get(position).getFoodName()));
+        holder.type.setText(String.format("%s : %s", "Food Type", foodData.get(position).getFoodType()));
+        holder.brandName.setText(String.format("%s : %s",  "Brand Name", foodData.get(position).getBrandName()));
+        holder.foodUrl.setText(String.format("%s : %s",  "Food Url", foodData.get(position).getFoodUrl()));
+        holder.foodDescription.setText(String.format("%s : %s", "Food Description", foodData.get(position).getFoodDescription()));
         //implement setOnCLickListener on itemView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +65,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsersViewHolde
 
     class UsersViewHolder extends RecyclerView.ViewHolder {
         // init the item view's
-        TextView name, type, brandName;
+        TextView name, type, brandName, foodUrl, foodDescription;
         public UsersViewHolder(View itemView) {
             super(itemView);
             // get the reference of item view's
             name = (TextView) itemView.findViewById(R.id.name);
             type = (TextView) itemView.findViewById(R.id.type);
             brandName = (TextView) itemView.findViewById(R.id.brandName);
+            foodUrl = (TextView) itemView.findViewById(R.id.foodUrl);
+            foodDescription = (TextView) itemView.findViewById(R.id.foodDescription);
         }
     }
 
