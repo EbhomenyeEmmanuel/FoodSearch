@@ -2,4 +2,9 @@
     <string name="app_name">FoodSearch</string>
     <string name="button_text">Click - Here</string>
     <string name="welcomeText">Welcome</string>
+    <string name="foodName">Name: </string>
+    <string name="foodType">Type: </string>
+    <string name="brandName">Brand Name: </string>
+    <string name="foodUrl">Food Url: </string>
+    <string name="foodDescription">Description: </string>
 </resources>
