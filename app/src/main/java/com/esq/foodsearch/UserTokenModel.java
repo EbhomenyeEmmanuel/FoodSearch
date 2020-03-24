@@ -1,7 +1,9 @@
 package com.esq.foodsearch;
 
 import com.google.gson.annotations.SerializedName;
-
+/*
+ *POJO class to get token
+ */
 public class UserTokenModel {
     @SerializedName("access_token")
     private String token;
