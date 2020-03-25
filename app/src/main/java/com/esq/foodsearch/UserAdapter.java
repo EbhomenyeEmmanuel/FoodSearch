@@ -16,19 +16,20 @@ import java.util.ArrayList;
  */
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsersViewHolder>{
     Context context;
-    ArrayList<Food> foodData;
+    private ArrayList<Food> foodData;
     String TAG = "UserAdapter.this";
-
+    private OnFoodItemListener onFoodItemListener;
     @NonNull
     @Override
     public UserAdapter.UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.user_list_items, null);
-        return new UsersViewHolder(view);
+        return new UsersViewHolder(view, onFoodItemListener);
         }
 
-    public UserAdapter(Context context, ArrayList<Food> foodData) {
+    public UserAdapter(Context context, ArrayList<Food> foodData, OnFoodItemListener onFoodItemListener) {
         this.foodData = foodData;
         this.context = context;
+        this.onFoodItemListener = onFoodItemListener;
         if (foodData == null) {
             Log.d(TAG,"Constructor: FoodData is null" );
         }
@@ -43,14 +44,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsersViewHolde
         holder.brandName.setText(String.format("%s : %s",  "Brand Name", foodData.get(position).getBrandName()));
         holder.foodUrl.setText(String.format("%s : %s",  "Food Url", foodData.get(position).getFoodUrl()));
         holder.foodDescription.setText(String.format("%s : %s", "Food Description", foodData.get(position).getFoodDescription()));
-        //implement setOnCLickListener on itemView
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // display a toast with user name
-                Toast.makeText(context, foodData.get(position).getFoodName(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -63,10 +56,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsersViewHolde
        return foodData != null ?foodData.size(): 0; // size of the list items;
     }
 
-    class UsersViewHolder extends RecyclerView.ViewHolder {
+    class UsersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // init the item view's
         TextView name, type, brandName, foodUrl, foodDescription;
-        public UsersViewHolder(View itemView) {
+        OnFoodItemListener onFoodItemListener;
+        public UsersViewHolder(View itemView, OnFoodItemListener onFoodItemListener) {
             super(itemView);
             // get the reference of item view's
             name = (TextView) itemView.findViewById(R.id.name);
@@ -74,7 +68,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsersViewHolde
             brandName = (TextView) itemView.findViewById(R.id.brandName);
             foodUrl = (TextView) itemView.findViewById(R.id.foodUrl);
             foodDescription = (TextView) itemView.findViewById(R.id.foodDescription);
+            this.onFoodItemListener = onFoodItemListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onFoodItemListener.onFoodItemClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnFoodItemListener{
+        void onFoodItemClick(int position);
     }
 
 }

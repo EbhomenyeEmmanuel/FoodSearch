@@ -20,12 +20,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements UserAdapter.OnFoodItemListener{
     RecyclerView recyclerView;
     public static final String TOKEN = "token";
     String TAG = "MainActivity.this";
     int tokenTimeLeft; //From intent
-    ArrayList searchListResponseData ;//List of results found
+    ArrayList<Food> searchListResponseData ;//List of results found
     ProgressDialog progressDialog;
     String searchKey;//String Value of food to search for
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    //Use token gotten from intent to set upRecyclerView
+    //Use token gotten from intent to set up RecyclerView
     private void getUserListData() {
         progressDialog = new ProgressDialog(MainActivity.this);// display a progress dialog
         progressDialog.setCancelable(false); // set cancelable to false
@@ -122,8 +122,13 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
         // call the constructor of UsersAdapter to send the reference and data to Adapter
-        UserAdapter usersAdapter = new UserAdapter(MainActivity.this, searchListResponseData);
+        UserAdapter usersAdapter = new UserAdapter(MainActivity.this, searchListResponseData, this);
         recyclerView.setAdapter(usersAdapter); // set the Adapter to RecyclerView
     }
 
+    @Override
+    public void onFoodItemClick(int position) {
+        Toast.makeText(MainActivity.this, searchListResponseData.get(position).getFoodName(), Toast.LENGTH_SHORT).show();
+        Log.d(TAG, String.format("%s%d%s", "onFoodItemClick: Item ", position, "clicked"));
+    }
 }
