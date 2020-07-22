@@ -1,64 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="#4990E2"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginBottom="5dp"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/foodName"
-            android:textColor="#E7EFF6"
-            android:layout_margin="5dp"
-            android:textSize="17sp" />
+    <data>
+<variable
+    name="viewModel"
+    type="com.esq.foodsearch.model.Food" />
+    </data>
 
-        <TextView
-            android:id="@+id/type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/foodType"
-            android:textColor="#E7EFF6"
-            android:layout_margin="5dp"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/brandName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/brandName"
-            android:textColor="#E7EFF6"
-            android:layout_margin="5dp"
-            android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/foodUrl"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/foodUrl"
-        android:textColor="#E7EFF6"
-        android:layout_margin="5dp"
-        android:textSize="16sp" />
+        android:layout_marginBottom="5dp">
 
-    <TextView
-        android:id="@+id/foodDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/foodDescription"
-        android:textColor="#E7EFF6"
-        android:layout_margin="5dp"
-        android:textSize="16sp" />
-
-    <View
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
-            android:background="#E7EFF6" />
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:cardCornerRadius="4dp"
+            app:cardPreventCornerOverlap="true">
 
-    </LinearLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/foodName"
+                    android:textAppearance="?attr/textAppearanceHeadline4"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/foodName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text='@{viewModel.foodName , default="Rice"}'
+                    android:textColor="#a9a9a9"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/name"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/foodType"
+                    android:textAppearance="?attr/textAppearanceHeadline4"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/foodName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/foodType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text='@{ viewModel.foodType , default="Generic"}'
+                    android:textColor="#a9a9a9"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/type"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/avatar4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:riv_corner_radius="5dip"
+                    app:riv_mutate_background="false"
+                    app:riv_oval="true"
+                    app:riv_tile_mode="clamp" />
+
+                <TextView
+                    android:id="@+id/brandName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text='@{viewModel.brandName , default="Null"}'
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="#a9a9a9"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/brand_bg"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageView"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+</layout>
