@@ -7,4 +7,6 @@
     <string name="brandName">Brand Name: </string>
     <string name="foodUrl">Food Url: </string>
     <string name="foodDescription">Description: </string>
+    <string name="search_hint">Search</string>
+    <string name="action_settings">Settings</string>
 </resources>
