@@ -12,6 +12,8 @@ import java.io.IOException
 
 class VerifyUserTokenActivityViewModel(private val repo: Repository = Repository()) : ViewModel() {
 
+    //TODO("Store the keys safely")
+    
     private val TAG = this::class.java.simpleName
     private var grantType: String = "client_credentials"
     private var clientId: String = "15763421aecc458294ee304cd7cab984"
