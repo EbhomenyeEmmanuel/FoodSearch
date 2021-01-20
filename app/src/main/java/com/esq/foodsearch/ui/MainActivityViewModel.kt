@@ -24,7 +24,7 @@ class MainActivityViewModel(application: Application, private val repo: Reposito
     fun getSearchList(searchKey: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {
-            val response = repo.getSearchList(authToken = "Bearer $authToken", method = "foods.search", searchExpression = searchKey)
+            val response = repo.getSearchList(authToken = "Bearer $authToken", searchExpression = searchKey)
             emit(Resource.success(response))
         } catch (e: IOException) {
             emit(Resource.error(e.message!!, data = null))

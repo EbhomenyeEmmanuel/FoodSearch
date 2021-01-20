@@ -11,7 +11,7 @@ import io.paperdb.Paper
 
 class Repository {
     private val TAG: String? = Repository::class.simpleName
-    var client: FatSecretApiInterface = Api.getClient()
+    var client: FatSecretApiInterface = Api.client
     suspend fun verifyToken(grantType: String,
                             clientID: String,
                             clientSecret: String,
@@ -24,12 +24,13 @@ class Repository {
         return client.login(fieldMaps)
     }
 
-    suspend fun getSearchList(authToken: String, method: String, searchExpression: String):
+    suspend fun getSearchList(authToken: String, method: String = "foods.search", maxResults: Int = 40, searchExpression: String, format: String = "json"):
             FoodModelClass? {
         val fieldMaps = mutableMapOf<String, String>()
         fieldMaps["method"] = method
         fieldMaps["search_expression"] = searchExpression
-        return client.getResultsList(authToken, fieldMaps)
+        fieldMaps["format"] = format
+        return client.getResultsList(authToken, fieldMaps, maxResults)
     }
 
     //Get saved clicked item

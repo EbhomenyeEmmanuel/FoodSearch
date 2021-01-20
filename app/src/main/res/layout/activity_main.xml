@@ -9,55 +9,6 @@
         android:background="#E7EFF6"
         tools:context=".ui.MainActivity">
 
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="16dp"
-            android:orientation="vertical"
-            android:padding="24dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarLayout">
-
-            <TextView
-                android:id="@+id/noSearchTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="You haven't made a search yet"
-                android:textAlignment="center"
-                android:textAppearance="?attr/textAppearanceHeadline4"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/errorMsgTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Not Found"
-                android:textAlignment="center"
-                android:textAppearance="?attr/textAppearanceHeadline4"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/lottie"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_gravity="center"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/empty" />
-
-        </LinearLayout>
-
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
@@ -84,7 +35,6 @@
             android:layout_margin="8dp"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

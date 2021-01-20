@@ -20,6 +20,7 @@
             android:clipChildren="false"
             android:clipToPadding="false"
             app:cardCornerRadius="4dp"
+            app:cardElevation="10dp"
             app:cardPreventCornerOverlap="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,61 +29,67 @@
 
                 <TextView
                     android:id="@+id/name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="8dp"
+                   android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/foodName"
                     android:textAppearance="?attr/textAppearanceHeadline4"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/foodName"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:text='@{viewModel.foodName , default="Rice"}'
                     android:textColor="#a9a9a9"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@id/name"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintTop_toTopOf="@id/name"
+                    app:layout_constraintBottom_toBottomOf="@id/name"
+                    app:layout_constraintEnd_toStartOf="@id/imageView"
+                    app:layout_constraintStart_toEndOf="@id/name"/>
 
                 <TextView
                     android:id="@+id/type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/foodType"
                     android:textAppearance="?attr/textAppearanceHeadline4"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@id/foodName"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/foodType"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:text='@{ viewModel.foodType , default="Generic"}'
                     android:textColor="#a9a9a9"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@id/type"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintTop_toTopOf="@id/type"
+                    app:layout_constraintBottom_toBottomOf="@id/type"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/type" />
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/imageView"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_margin="8dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/avatar4"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -109,6 +116,13 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imageView"
                     app:layout_constraintEnd_toEndOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="66dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

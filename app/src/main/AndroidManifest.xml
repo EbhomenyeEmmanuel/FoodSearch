@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.esq.foodsearch">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,20 +20,25 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="android.app.default_searchable"
-            android:value=".ui.MainActivity"/>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
-                </intent-filter>
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+
+        <activity android:name=".ui.MainActivity" />
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".ui.SearchActivity" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -1,63 +1,50 @@
 package com.esq.foodsearch.model
 
-import com.google.gson.annotations.JsonAdapter
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-import java.util.ArrayList
-
+import com.google.gson.annotations.SerializedName
 /*
  *POJO class to get token
  */
-@JsonClass(generateAdapter = true)
-data
-class UserTokenModel (
-    @Json(name = "access_token")
-    val token: String? = null,
-    @Json(name = "expires_in")
-    val tokenExpirationSeconds : Int = 0)
 
+data class UserTokenModel(
+        @SerializedName("access_token")
+        val token: String? = null,
+        @SerializedName("expires_in")
+        val tokenExpirationSeconds: Int = 0)
 
 data class LoginModel(val user: String, val password: String)
 
-@JsonClass(generateAdapter = true)
-data class Foods (
-        @Json(name = "food")
-        var food: ArrayList<Food>? = null
-        ,
-        @Json(name = "max_results")
-        var maxResults: String? = null
-        ,
-        @Json(name = "page_number")
-        var pageNumber: String? = null
-        ,
-        @Json(name = "total_results")
-        var totalResults: String? = null)
-
-@JsonClass(generateAdapter = true)
-data class FoodModelClass (
-        @Json(name = "foods")
+data class FoodModelClass(
+        @SerializedName("foods")
         var foods: Foods? = null)
 
-/*
- *Food class contain details about a specified food
- */
-@JsonClass(generateAdapter = true)
-data class Food(
-        @Json(name = "food_description")
-        var foodDescription: String? = null
+data class Foods(
+        @SerializedName("food")
+        var food: ArrayList<Food>
         ,
-        @Json(name = "food_id")
+        @SerializedName("max_results")
+        var maxResults: String
+        ,
+        @SerializedName("page_number")
+        var pageNumber: String
+        ,
+        @SerializedName("total_results")
+        var totalResults: String)
+
+data class Food(
+        @SerializedName("food_id")
         var foodId: String? = null
         ,
-        @Json(name = "food_name")
+        @SerializedName("food_name")
         var foodName: String? = null
         ,
-        @Json(name = "food_type")
+        @SerializedName("food_type")
         var foodType: String? = null
         ,
-        @Json(name = "food_url")
+        @SerializedName("brand_name")
+        var brandName: String? = null,
+        @SerializedName("food_url")
         var foodUrl: String? = null
         ,
-        @Json(name = "brand_name")
-        var brandName: String? = null
+        @SerializedName("food_description")
+        var foodDescription: String? = null
 )

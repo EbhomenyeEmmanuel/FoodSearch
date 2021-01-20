@@ -14,8 +14,5 @@ interface FatSecretApiInterface {
 
     @GET("https://platform.fatsecret.com/rest/server.api?")
     suspend fun getResultsList(@Header("Authorization") authToken: String?,
-                       @QueryMap user : Map<String, String>): FoodModelClass
-    // FoodModel is POJO class to get the data from API, In above method I used Call<FoodModelClass>
-    // because the data in our API is starting from JSONArray
-    // and callback is used to get the response from api and it will set it in our POJO class
+                       @QueryMap user : Map<String, String>, @Query("max_results")maxResult: Int): FoodModelClass
 }

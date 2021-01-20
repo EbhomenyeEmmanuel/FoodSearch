@@ -44,9 +44,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsersViewHolde
     public void onBindViewHolder(@NonNull UserAdapter.UsersViewHolder holder, final int position) {
         // set the data
         Food mFood = foodData.get(position);
-        holder.mUserListItemsBinding.foodName.setText(String.format("%s : %s", "Food Name", mFood.getFoodName()));
-        holder.mUserListItemsBinding.foodType.setText(String.format("%s : %s", "Food Type", mFood.getFoodType()));
-        holder.mUserListItemsBinding.brandName.setText(String.format("%s : %s", "Brand Name", mFood.getBrandName()));
+        holder.mUserListItemsBinding.foodName.setText(mFood.getFoodName());
+        holder.mUserListItemsBinding.foodType.setText(mFood.getFoodType());
+        holder.mUserListItemsBinding.brandName.setText(mFood.getBrandName());
     }
 
     @Override

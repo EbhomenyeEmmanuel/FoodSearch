@@ -6,13 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.esq.foodsearch.R;
-import com.esq.foodsearch.model.UserTokenModel;
 import com.esq.foodsearch.utils.Constants;
-import com.esq.foodsearch.utils.Resource;
 import com.esq.foodsearch.utils.Status;
 import com.esq.foodsearch.utils.UtilsKt;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -33,36 +30,42 @@ public class VerifyUserTokenActivity extends AppCompatActivity {
         setContentView(R.layout.start_up_screen);
         mViewModel = new ViewModelProvider(this).get(VerifyUserTokenActivityViewModel.class);
 
+      /*
+       new Handler().postDelayed(new Runnable() {
+           @Override
+           public void run() {
+               startActivity(new Intent(VerifyUserTokenActivity.this, MainActivity.class));
+           }
+       },3000);
+       */
+
         verifyToken();
 
     }
 
     private void verifyToken() {
-        mViewModel.getTokenResponse().observe(this, new Observer<Resource<UserTokenModel>>() {
-            @Override
-            public void onChanged(Resource<UserTokenModel> userTokenModelResource) {
-                Status status = userTokenModelResource.getStatus();
-                if (status == Status.LOADING) {//  progressDialog.setMessage("Please Wait... Token is generated"); // set message
-                    UtilsKt.longToast(VerifyUserTokenActivity.this, "Loading");
-                    Log.d(TAG, "verifyToken(): Loading");
-                } else if (status == Status.SUCCESS) {//Store clicked item in paper db
-                    Paper.init(VerifyUserTokenActivity.this);
-                    Paper.book().delete(Constants.CREDENTIALS_RESPONSE);
-                    Paper.book().write(Constants.CREDENTIALS_RESPONSE, userTokenModelResource.getData());
-                    UtilsKt.longToast(VerifyUserTokenActivity.this, "Success");
-                    Log.d(TAG, "verifyToken(): Success");
-                    startActivity(new Intent(VerifyUserTokenActivity.this, MainActivity.class));
-                    finish();
-                } else if (status == Status.ERROR) {
-                    Log.d(TAG, "verifyToken(): Error");
-                    dialog = new SweetAlertDialog(VerifyUserTokenActivity.this, SweetAlertDialog.ERROR_TYPE);
-                    dialog.setTitleText("Oops...");
-                    dialog.setContentText(userTokenModelResource.getMessage());
-                    dialog.setCancelable(true);
-                    dialog.create();
-                    dialog.show();
-                    UtilsKt.longToast(VerifyUserTokenActivity.this, "Error");
-                }
+        mViewModel.getTokenResponse().observe(this, userTokenModelResource -> {
+            Status status = userTokenModelResource.getStatus();
+            if (status == Status.LOADING) {//  progressDialog.setMessage("Please Wait... Token is generated"); // set message
+                UtilsKt.longToast(VerifyUserTokenActivity.this, "Loading");
+                Log.d(TAG, "verifyToken(): Loading");
+            } else if (status == Status.SUCCESS) {//Store clicked item in paper db
+                Paper.init(VerifyUserTokenActivity.this);
+                Paper.book().delete(Constants.CREDENTIALS_RESPONSE);
+                Paper.book().write(Constants.CREDENTIALS_RESPONSE, userTokenModelResource.getData());
+                UtilsKt.longToast(VerifyUserTokenActivity.this, "Success");
+                Log.d(TAG, "verifyToken(): Success");
+                startActivity(new Intent(VerifyUserTokenActivity.this, MainActivity.class));
+                finish();
+            } else if (status == Status.ERROR) {
+                Log.d(TAG, "verifyToken(): Error");
+                dialog = new SweetAlertDialog(VerifyUserTokenActivity.this, SweetAlertDialog.ERROR_TYPE);
+                dialog.setTitleText("Oops...");
+                dialog.setContentText(userTokenModelResource.getMessage());
+                dialog.setCancelable(true);
+                dialog.create();
+                dialog.show();
+                UtilsKt.longToast(VerifyUserTokenActivity.this, "Error");
             }
         });
 
