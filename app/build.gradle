@@ -1,18 +1,37 @@
 apply plugin: 'com.android.application'
+
 apply plugin: 'kotlin-android'
+
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'dagger.hilt.android.plugin'
+
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion rootProject.ext.targetSdkVersion
+    buildToolsVersion '30.0.3'
+
     defaultConfig {
         applicationId "com.esq.foodsearch"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2
         versionName "1.1"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.raywenderlich.android.petsave.HiltTestRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
+            }
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,51 +47,98 @@ android {
     kotlinOptions {
         jvmTarget = 1.8
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
     dataBinding {
         enabled = true
     }
-// To inline the bytecode built with JVM target 1.8 into
-// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
-    // For control over item selection of both touch and mouse driven selection
-    implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
-    // dependency for Retrofit
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
-    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.7.1'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment:2.3.0'
-    implementation 'androidx.navigation:navigation-ui:2.3.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
+    // Support Libraries
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
 
-    // material components
-    implementation "com.google.android.material:material:1.1.0"
+    // Testing Dependencies
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "com.google.truth:truth:$google_truth_version"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
+    androidTestImplementation "com.google.truth:truth:$google_truth_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$androidx_core_testing_version"
 
-    def lifecycle_version = "2.2.0"
+    testImplementation("com.squareup.okhttp3:mockwebserver:$mockwebserver_version")
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:$mockwebserver_version")
+
+
+    // // Modules
+    implementation project(":logging")
+
+    // Network
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$moshi_converter_version"
+    implementation "com.squareup.okhttp3:okhttp:$okHttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
+
+    // Cache
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // Concurrency
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+
+    // DI
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$androidx_hilt_version"
+    kapt "androidx.hilt:hilt-compiler:$androidx_hilt_version"
+
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    // UI
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    implementation "com.google.android.material:material:$material_version"
+
+
+    // Navigation
+  implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+  implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+  // Utils
+    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
-    // Room dependency
-    def room_version = "2.3.0-alpha01"
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
-
+    //Other dependencies
     // paper library
     implementation 'io.paperdb:paperdb:2.6'
 
@@ -98,12 +164,4 @@ dependencies {
     //Observing network
     implementation 'com.biodun.networkMonitorManager:networkMonitorManager:0.0.1'
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:rules:1.3.0-rc01'
-    androidTestImplementation 'androidx.test:core:1.2.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation "androidx.core:core-ktx:+"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-}
+   }
