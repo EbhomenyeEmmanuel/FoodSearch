@@ -14,8 +14,8 @@ import androidx.lifecycle.Observer
 import com.biodun.networkMonitorManager.NetworkState
 import com.esq.foodsearch.R
 import com.esq.foodsearch.databinding.ActivityMainBinding
-import com.esq.foodsearch.utils.longToast
-import com.esq.foodsearch.utils.shortToast
+import com.esq.foodsearch.common.utils.longToast
+import com.esq.foodsearch.common.utils.shortToast
 import com.google.android.material.appbar.MaterialToolbar
 
 open class SearchActivity : AppCompatActivity() {

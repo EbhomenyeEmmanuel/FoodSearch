@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.esq.foodsearch.R;
 import com.esq.foodsearch.databinding.UserListItemsBinding;
-import com.esq.foodsearch.model.Food;
+import com.esq.foodsearch.common.domain.model.food.Food;
 
 import java.util.ArrayList;
 
