@@ -1,4 +1,4 @@
-package com.esq.foodsearch.utils
+package com.esq.foodsearch.common.utils
 
 enum class Status {
     SUCCESS,

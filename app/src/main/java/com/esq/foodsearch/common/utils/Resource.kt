@@ -1,4 +1,4 @@
-package com.esq.foodsearch.utils
+package com.esq.foodsearch.common.utils
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
 
