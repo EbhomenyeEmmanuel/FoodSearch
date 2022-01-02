@@ -20,7 +20,6 @@ android {
         versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunner "com.raywenderlich.android.petsave.HiltTestRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -33,9 +32,15 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField 'String', 'ApiKey', MY_API_KEY
+            buildConfigField 'String', 'ApiSecret', MY_API_SECRET
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'ApiKey', MY_API_KEY
+            buildConfigField 'String', 'ApiSecret', MY_API_SECRET
         }
     }
 
@@ -139,8 +144,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
     //Other dependencies
-    // paper library
-    implementation 'io.paperdb:paperdb:2.6'
 
     // veil layout
     implementation "com.github.skydoves:androidveil:1.0.9"
